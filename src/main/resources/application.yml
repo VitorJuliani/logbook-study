@@ -1,0 +1,16 @@
+logging:
+  level:
+    org:
+      zalando:
+        logbook: TRACE
+
+logbook:
+#  include:
+#    - /api/**
+#    - /actuator/**
+  exclude:
+    - /actuator/health
+
+log:
+  omitted-fields:
+    - age
