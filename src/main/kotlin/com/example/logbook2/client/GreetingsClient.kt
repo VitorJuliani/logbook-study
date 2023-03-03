@@ -14,4 +14,7 @@ interface GreetingsClient {
 
     @GetMapping
     fun getGreeting(): String
+
+    @GetMapping("/error")
+    fun getGreetingError()
 }

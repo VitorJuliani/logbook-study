@@ -39,6 +39,7 @@ class GreetingsController(
 
     @GetMapping("/failure")
     fun getGreetingFailure(): ResponseEntity<Unit> {
-        throw IllegalStateException("Could not retrieve greeting info")
+        client.getGreetingError()
+        return ResponseEntity.ok(Unit)
     }
 }
