@@ -1,4 +1,4 @@
-package com.example.logbook2.filter
+package com.example.logbook2.interceptor
 
 import java.lang.Exception
 import java.util.UUID
@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 class CorrelationIdInterceptor : HandlerInterceptor {
 
     private val correlationIdHeaderName = "correlation-id"
+
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         val correlationId = request.getHeader(correlationIdHeaderName)
             ?: UUID.randomUUID().toString()
@@ -32,15 +33,5 @@ class CorrelationIdInterceptor : HandlerInterceptor {
         ex: Exception?
     ) {
         MDC.clear()
-    }
-}
-
-@Component
-class ConfigInterceptor(
-    private val correlationIdInterceptor: CorrelationIdInterceptor
-) : WebMvcConfigurer {
-
-    override fun addInterceptors(registry: InterceptorRegistry) {
-        registry.addInterceptor(correlationIdInterceptor)
     }
 }
